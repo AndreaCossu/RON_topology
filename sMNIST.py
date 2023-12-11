@@ -39,10 +39,14 @@ parser.add_argument('--trials', type=int, default=1,
 parser.add_argument('--topology', type=str, default='full',
                     choices=['full', 'band', 'lower', 'toeplitz', 'orthogonal'],
                     help='Topology of the reservoir')
+parser.add_argument('--sparsity', type=float, default=0.0,
+                    help='Sparsity of the reservoir')
 
 main_folder = 'result'
 args = parser.parse_args()
 print(args)
+
+assert 1.0 > args.sparsity >= 0.0, "Sparsity in [0, 1)"
 
 @torch.no_grad()
 def test(data_loader, classifier, scaler):
@@ -71,11 +75,11 @@ for i in range(args.trials):
     if args.esn:
         model = DeepReservoir(n_inp, tot_units=args.n_hid, spectral_radius=args.rho,
                               input_scaling=args.inp_scaling,
-                              connectivity_recurrent=args.n_hid,
+                              connectivity_recurrent=int((1 - args.sparsity) * args.n_hid),
                               connectivity_input=args.n_hid, leaky=args.leaky).to(device)
     elif args.ron:
         model = RON(n_inp, args.n_hid, args.dt, gamma, epsilon, args.rho,
-                      args.inp_scaling, topology=args.topology, device=device).to(device)
+                      args.inp_scaling, topology=args.topology, sparsity=args.sparsity, device=device).to(device)
 
     else:
         raise ValueError("Wrong model choice.")

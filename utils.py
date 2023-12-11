@@ -71,7 +71,7 @@ class LSTM(nn.Module):
         return out
 
 
-def get_hidden_topology(n_hid, topology):
+def get_hidden_topology(n_hid, topology, sparsity):
     if topology == 'full':
         h2h = 2 * (2 * torch.rand(n_hid, n_hid) - 1)
     else:
@@ -83,7 +83,7 @@ class RON(nn.Module):
     """
     Batch-first (B, L, I)
     """
-    def __init__(self, n_inp, n_hid, dt, gamma, epsilon, rho, input_scaling, topology='full', device='cpu'):
+    def __init__(self, n_inp, n_hid, dt, gamma, epsilon, rho, input_scaling, topology='full', sparsity=0.0, device='cpu'):
         super().__init__()
         self.n_hid = n_hid
         self.device = device
@@ -99,7 +99,7 @@ class RON(nn.Module):
         else:
             self.epsilon = epsilon
 
-        h2h = get_hidden_topology(n_hid, topology)
+        h2h = get_hidden_topology(n_hid, topology, sparsity)
         h2h = spectral_norm_scaling(h2h, rho)
         self.h2h = nn.Parameter(h2h, requires_grad=False)
 
