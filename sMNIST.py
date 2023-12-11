@@ -41,7 +41,7 @@ parser.add_argument('--topology', type=str, default='full',
                     help='Topology of the reservoir')
 parser.add_argument('--sparsity', type=float, default=0.0,
                     help='Sparsity of the reservoir')
-parser.add_argument('--orth_scaler', type=float, default=0.0,
+parser.add_argument('--orth_scaler', type=float, default=1.0,
                     help='Scaler in case of orthogonal reservoir')
 
 main_folder = 'result'
@@ -55,7 +55,7 @@ def test(data_loader, classifier, scaler):
     activations, ys = [], []
     for images, labels in tqdm(data_loader):
         images = images.to(device)
-        images = images.view(args.batch, -1).unsqueeze(-1)
+        images = images.view(images.shape[0], -1).unsqueeze(-1)
         output = model(images)[-1][0]
         activations.append(output.cpu())
         ys.append(labels)
@@ -94,7 +94,7 @@ for i in range(args.trials):
     activations, ys = [], []
     for images, labels in tqdm(train_loader):
         images = images.to(device)
-        images = images.view(args.batch, -1).unsqueeze(-1)
+        images = images.view(images.shape[0], -1).unsqueeze(-1)
         output = model(images)[-1][0]
         activations.append(output.cpu())
         ys.append(labels)
