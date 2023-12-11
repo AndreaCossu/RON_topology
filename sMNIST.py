@@ -41,8 +41,8 @@ parser.add_argument('--topology', type=str, default='full',
                     help='Topology of the reservoir')
 parser.add_argument('--sparsity', type=float, default=0.0,
                     help='Sparsity of the reservoir')
-parser.add_argument('--orth_scaler', type=float, default=1.0,
-                    help='Scaler in case of orthogonal reservoir')
+parser.add_argument('--reservoir_scaler', type=float, default=1.0,
+                    help='Scaler in case of ring/band/toeplitz reservoir')
 
 main_folder = 'result'
 args = parser.parse_args()
@@ -82,7 +82,7 @@ for i in range(args.trials):
     elif args.ron:
         model = RON(n_inp, args.n_hid, args.dt, gamma, epsilon, args.rho,
                     args.inp_scaling, topology=args.topology, sparsity=args.sparsity,
-                    orth_scaler=args.orth_scaler, device=device).to(device)
+                    reservoir_scaler=args.reservoir_scaler, device=device).to(device)
 
     else:
         raise ValueError("Wrong model choice.")

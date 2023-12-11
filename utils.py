@@ -71,7 +71,7 @@ class LSTM(nn.Module):
         return out
 
 
-def get_hidden_topology(n_hid, topology, sparsity, orth_scaler):
+def get_hidden_topology(n_hid, topology, sparsity, scaler):
     if topology == 'full':
         h2h = 2 * (2 * torch.rand(n_hid, n_hid) - 1)
     elif topology == 'lower':
@@ -83,12 +83,38 @@ def get_hidden_topology(n_hid, topology, sparsity, orth_scaler):
     elif topology == 'orthogonal':
         rand = torch.rand(n_hid, n_hid)
         orth = torch.linalg.qr(rand)[0]
-        identity = torch.eye(n_hid) * orth_scaler
+        identity = torch.eye(n_hid)
         if sparsity > 0:
             n_zeroed_rows = int(sparsity * n_hid)
             idxs = torch.randperm(n_hid)[:n_zeroed_rows].tolist()
             identity[idxs, idxs] = 0.
         h2h = torch.matmul(identity, orth)
+    elif topology == 'band':
+        bandwidth = int(scaler)  # 5
+        h2h = torch.zeros(n_hid, n_hid)
+        for i in range(bandwidth, n_hid - bandwidth):
+            h2h[i, i - bandwidth: i + bandwidth + 1] = 2 * torch.rand(2 * bandwidth + 1) - 1
+        for i in range(0, bandwidth):
+            h2h[i, 0: i + bandwidth + 1] = 2 * torch.rand(i + bandwidth + 1) - 1
+        for i in range(n_hid - bandwidth, n_hid):
+            h2h[i, i - bandwidth: n_hid] = 2 * torch.rand(n_hid + bandwidth - i) - 1
+    elif topology == 'ring':
+        # scaler = 1
+        h2h = torch.zeros(n_hid, n_hid)
+        for i in range(1, n_hid):
+            h2h[i, i - 1] = 1
+        h2h[0, n_hid - 1] = 1
+        h2h = scaler * h2h
+    elif topology == 'toeplitz':
+        from scipy.linalg import toeplitz
+        bandwidth = int(scaler)  # 5
+        upperdiagcoefs = np.zeros(n_hid)
+        upperdiagcoefs[:bandwidth] = 2 * torch.rand(bandwidth) - 1
+        lowerdiagcoefs = np.zeros(n_hid)
+        lowerdiagcoefs[:bandwidth] = 2 * torch.rand(bandwidth) - 1
+        lowerdiagcoefs[0] = upperdiagcoefs[0]  # diagonal coefficient
+        h2h = toeplitz(list(lowerdiagcoefs), list(upperdiagcoefs))
+        h2h = torch.Tensor(h2h)
     else:
         raise ValueError("Wrong topology choice.")
     return h2h
@@ -98,7 +124,8 @@ class RON(nn.Module):
     """
     Batch-first (B, L, I)
     """
-    def __init__(self, n_inp, n_hid, dt, gamma, epsilon, rho, input_scaling, topology='full', orth_scaler=0., sparsity=0.0, device='cpu'):
+    def __init__(self, n_inp, n_hid, dt, gamma, epsilon, rho, input_scaling, topology='full',
+                 reservoir_scaler=0., sparsity=0.0, device='cpu'):
         super().__init__()
         self.n_hid = n_hid
         self.device = device
@@ -114,7 +141,7 @@ class RON(nn.Module):
         else:
             self.epsilon = epsilon
 
-        h2h = get_hidden_topology(n_hid, topology, sparsity, orth_scaler)
+        h2h = get_hidden_topology(n_hid, topology, sparsity, reservoir_scaler)
         h2h = spectral_norm_scaling(h2h, rho)
         self.h2h = nn.Parameter(h2h, requires_grad=False)
 
