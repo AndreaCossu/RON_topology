@@ -37,7 +37,7 @@ parser.add_argument('--use_test', action="store_true")
 parser.add_argument('--trials', type=int, default=1,
                     help='How many times to run the experiment')
 parser.add_argument('--topology', type=str, default='full',
-                    choices=['full', 'band', 'lower', 'toeplitz', 'orthogonal'],
+                    choices=['full', 'ring', 'band', 'lower', 'toeplitz', 'orthogonal'],
                     help='Topology of the reservoir')
 parser.add_argument('--sparsity', type=float, default=0.0,
                     help='Sparsity of the reservoir')
