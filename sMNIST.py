@@ -41,6 +41,8 @@ parser.add_argument('--topology', type=str, default='full',
                     help='Topology of the reservoir')
 parser.add_argument('--sparsity', type=float, default=0.0,
                     help='Sparsity of the reservoir')
+parser.add_argument('--orth_scaler', type=float, default=0.0,
+                    help='Scaler in case of orthogonal reservoir')
 
 main_folder = 'result'
 args = parser.parse_args()
@@ -79,7 +81,8 @@ for i in range(args.trials):
                               connectivity_input=args.n_hid, leaky=args.leaky).to(device)
     elif args.ron:
         model = RON(n_inp, args.n_hid, args.dt, gamma, epsilon, args.rho,
-                      args.inp_scaling, topology=args.topology, sparsity=args.sparsity, device=device).to(device)
+                    args.inp_scaling, topology=args.topology, sparsity=args.sparsity,
+                    orth_scaler=args.orth_scaler, device=device).to(device)
 
     else:
         raise ValueError("Wrong model choice.")
@@ -108,7 +111,7 @@ for i in range(args.trials):
     test_accs.append(test_acc)
 
 if args.ron:
-    f = open(f'{main_folder}/sMNIST_log_RON.txt', 'a')
+    f = open(f'{main_folder}/sMNIST_log_RON_{args.topology}.txt', 'a')
 elif args.esn:
     f = open(f'{main_folder}/sMNIST_log_ESN.txt', 'a')
 else:

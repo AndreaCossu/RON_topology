@@ -71,9 +71,24 @@ class LSTM(nn.Module):
         return out
 
 
-def get_hidden_topology(n_hid, topology, sparsity):
+def get_hidden_topology(n_hid, topology, sparsity, orth_scaler):
     if topology == 'full':
         h2h = 2 * (2 * torch.rand(n_hid, n_hid) - 1)
+    elif topology == 'lower':
+        h2h = torch.tril(torch.rand(n_hid, n_hid))
+        if sparsity > 0:
+            n_zeroed_diagonals = int(sparsity * n_hid)
+            for i in range(n_hid-1, n_hid - n_zeroed_diagonals - 1, -1):
+                h2h.diagonal(-i).zero_()
+    elif topology == 'orthogonal':
+        rand = torch.rand(n_hid, n_hid)
+        orth = torch.linalg.qr(rand)[0]
+        identity = torch.eye(n_hid) * orth_scaler
+        if sparsity > 0:
+            n_zeroed_rows = int(sparsity * n_hid)
+            idxs = torch.randperm(n_hid)[:n_zeroed_rows].tolist()
+            identity[idxs, idxs] = 0.
+        h2h = torch.matmul(identity, orth)
     else:
         raise ValueError("Wrong topology choice.")
     return h2h
@@ -83,7 +98,7 @@ class RON(nn.Module):
     """
     Batch-first (B, L, I)
     """
-    def __init__(self, n_inp, n_hid, dt, gamma, epsilon, rho, input_scaling, topology='full', sparsity=0.0, device='cpu'):
+    def __init__(self, n_inp, n_hid, dt, gamma, epsilon, rho, input_scaling, topology='full', orth_scaler=0., sparsity=0.0, device='cpu'):
         super().__init__()
         self.n_hid = n_hid
         self.device = device
@@ -99,7 +114,7 @@ class RON(nn.Module):
         else:
             self.epsilon = epsilon
 
-        h2h = get_hidden_topology(n_hid, topology, sparsity)
+        h2h = get_hidden_topology(n_hid, topology, sparsity, orth_scaler)
         h2h = spectral_norm_scaling(h2h, rho)
         self.h2h = nn.Parameter(h2h, requires_grad=False)
 
