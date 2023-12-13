@@ -75,7 +75,7 @@ def get_hidden_topology(n_hid, topology, sparsity, scaler):
     if topology == 'full':
         h2h = 2 * (2 * torch.rand(n_hid, n_hid) - 1)
     elif topology == 'lower':
-        h2h = torch.tril(torch.rand(n_hid, n_hid))
+        h2h = torch.tril(2 * torch.rand(n_hid, n_hid) - 1)
         if sparsity > 0:
             n_zeroed_diagonals = int(sparsity * n_hid)
             for i in range(n_hid-1, n_hid - n_zeroed_diagonals - 1, -1):
