@@ -259,9 +259,9 @@ def get_Adiac_data(bs_train,bs_test, whole_train=False, RC=True):
 
     # generate torch dataloaders
     mytrainloader = data.DataLoader(mytraindata,
-                    batch_size=bs_train, shuffle=True, drop_last=True)
+                    batch_size=bs_train, shuffle=True, drop_last=False)
     myvaloader = data.DataLoader(myvaldata,
-                        batch_size=bs_test, shuffle=False, drop_last=True)
+                        batch_size=bs_test, shuffle=False, drop_last=False)
     mytestloader = data.DataLoader(mytestdata,
-                batch_size=bs_test, shuffle=False, drop_last=True)
+                batch_size=bs_test, shuffle=False, drop_last=False)
     return mytrainloader, myvaloader, mytestloader
