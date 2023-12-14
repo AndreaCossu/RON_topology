@@ -145,8 +145,6 @@ class RON(nn.Module):
         h2h = spectral_norm_scaling(h2h, rho)
         self.h2h = nn.Parameter(h2h, requires_grad=False)
 
-        # x2h = 2 * (2 * torch.rand(n_inp, self.n_hid) - 1) * input_scaling
-        # alternative init
         x2h = torch.rand(n_inp, n_hid) * input_scaling
         self.x2h = nn.Parameter(x2h, requires_grad=False)
         bias = (torch.rand(n_hid) * 2 - 1) * input_scaling

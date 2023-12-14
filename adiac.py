@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description='training parameters')
 
 parser.add_argument('--n_hid', type=int, default=256,
                     help='hidden size of recurrent net')
-parser.add_argument('--batch', type=int, default=64,
+parser.add_argument('--batch', type=int, default=30,
                     help='batch size')
 parser.add_argument('--dt', type=float, default=0.042,
                     help='step size <dt> of the coRNN')
@@ -71,21 +71,14 @@ gamma = (args.gamma - args.gamma_range / 2., args.gamma + args.gamma_range / 2.)
 epsilon = (args.epsilon - args.epsilon_range / 2., args.epsilon + args.epsilon_range / 2.)
 
 max_test_accs = []
-if args.test_trials > 1:
-    if args.esn:
-        train_loader, valid_loader, test_loader = get_Adiac_data(args.batch, args.batch, whole_train=True)
-    else:
-        train_loader, valid_loader, test_loader = get_Adiac_data(args.batch, args.batch, whole_train=True, RC=False)
+if args.trials > 1:
+    train_loader, valid_loader, test_loader = get_Adiac_data(args.batch, args.batch, whole_train=True)
 else:
-    if args.esn:
-        train_loader, valid_loader, test_loader = get_Adiac_data(args.batch, args.batch)
-    else:
-        train_loader, valid_loader, test_loader = get_Adiac_data(args.batch, args.batch, RC=False)
+    train_loader, valid_loader, test_loader = get_Adiac_data(args.batch, args.batch)
 
 train_accs, valid_accs, test_accs = [], [], []
-for i in range(args.test_trials):
-    accs = []
 
+for i in range(args.trials):
     if args.esn:
         model = DeepReservoir(n_inp, tot_units=args.n_hid, spectral_radius=args.rho,
                               input_scaling=args.inp_scaling,
