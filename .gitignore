@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 /Adiac_TEST.txt
 /Adiac_TRAIN.txt
+/mackey-glass.csv

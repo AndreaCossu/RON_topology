@@ -89,8 +89,6 @@ for i in range(args.trials):
 
     train_loader, valid_loader, test_loader = get_mnist_data(args.batch,args.batch)
 
-    objective = nn.CrossEntropyLoss()
-
     activations, ys = [], []
     for images, labels in tqdm(train_loader):
         images = images.to(device)
