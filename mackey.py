@@ -102,7 +102,7 @@ for i in range(args.trials):
     activations = activations.reshape(-1, args.n_hid)
     scaler = preprocessing.StandardScaler().fit(activations)
     activations = scaler.transform(activations)
-    classifier = Ridge(alpha=args.alpha, max_iter=1000).fit(activations, target)
+    classifier = Ridge(max_iter=1000).fit(activations, target)
     train_nmse = test(train_dataset, train_target, classifier, scaler)
     valid_nmse = test(valid_dataset, valid_target, classifier, scaler) if not args.use_test else 0.0
     test_nmse = test(test_dataset, test_target, classifier, scaler) if args.use_test else 0.0
