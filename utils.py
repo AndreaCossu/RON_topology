@@ -90,14 +90,12 @@ def get_hidden_topology(n_hid, topology, sparsity, scaler):
             identity[idxs, idxs] = 0.
         h2h = torch.matmul(identity, orth)
     elif topology == 'band':
-        bandwidth = int(scaler)  # 5
-        h2h = torch.zeros(n_hid, n_hid)
-        for i in range(bandwidth, n_hid - bandwidth):
-            h2h[i, i - bandwidth: i + bandwidth + 1] = 2 * torch.rand(2 * bandwidth + 1) - 1
-        for i in range(0, bandwidth):
-            h2h[i, 0: i + bandwidth + 1] = 2 * torch.rand(i + bandwidth + 1) - 1
-        for i in range(n_hid - bandwidth, n_hid):
-            h2h[i, i - bandwidth: n_hid] = 2 * torch.rand(n_hid + bandwidth - i) - 1
+        h2h = 2*torch.rand(n_hid, n_hid)-1
+        if sparsity > 0:
+            n_zeroed_diagonals = int(np.sqrt(sparsity) * n_hid)
+            for i in range(n_hid-1, n_hid - n_zeroed_diagonals - 1, -1):
+                h2h.diagonal(-i).zero_()
+                h2h.diagonal(i).zero_()
     elif topology == 'ring':
         # scaler = 1
         h2h = torch.zeros(n_hid, n_hid)
