@@ -115,13 +115,24 @@ def get_hidden_topology(n_hid, topology, sparsity, scaler):
         get_sparsity(h2h.numpy())
     elif topology == 'toeplitz':
         from scipy.linalg import toeplitz
-        bandwidth = int(scaler)  # 5
+        bandwidth = int(scaler)  
         upperdiagcoefs = np.zeros(n_hid)
         upperdiagcoefs[:bandwidth] = 2 * torch.rand(bandwidth) - 1
         lowerdiagcoefs = np.zeros(n_hid)
         lowerdiagcoefs[:bandwidth] = 2 * torch.rand(bandwidth) - 1
         lowerdiagcoefs[0] = upperdiagcoefs[0]  # diagonal coefficient
         h2h = toeplitz(list(lowerdiagcoefs), list(upperdiagcoefs))
+        get_sparsity(h2h)
+        h2h = torch.Tensor(h2h)
+    elif topology == 'circulant':
+        from scipy.linalg import circulant
+        bandwidth = int(scaler)  
+        lowerdiagcoefs = np.zeros(n_hid)
+        if bandwidth == n_hid:
+            lowerdiagcoefs[:n_hid] = 2 * torch.rand(n_hid) - 1 
+        else:
+            lowerdiagcoefs[1:bandwidth+1] = 2 * torch.rand(bandwidth) - 1 # leave the diagonal zero
+        h2h = circulant(list(lowerdiagcoefs))
         get_sparsity(h2h)
         h2h = torch.Tensor(h2h)
     else:
