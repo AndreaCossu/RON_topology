@@ -1,7 +1,7 @@
 from torch import nn
 import torch.nn.utils
 import numpy as np
-from utils import RON, get_Adiac_data
+from utils import RON, PRON, get_Adiac_data
 import argparse
 from tqdm import tqdm
 from esn import DeepReservoir
@@ -27,6 +27,7 @@ parser.add_argument('--epsilon_range', type=float, default=4.7,
 parser.add_argument('--cpu', action="store_true")
 parser.add_argument('--esn', action="store_true")
 parser.add_argument('--ron', action="store_true")
+parser.add_argument('--pron', action="store_true")
 parser.add_argument('--inp_scaling', type=float, default=1.,
                     help='ESN input scaling')
 parser.add_argument('--rho', type=float, default=0.99,
@@ -44,7 +45,7 @@ parser.add_argument('--sparsity', type=float, default=0.0,
 parser.add_argument('--reservoir_scaler', type=float, default=1.0,
                     help='Scaler in case of ring/band/toeplitz reservoir')
 
-main_folder = 'result'
+main_folder = 'result_paris'
 args = parser.parse_args()
 print(args)
 
@@ -72,6 +73,7 @@ epsilon = (args.epsilon - args.epsilon_range / 2., args.epsilon + args.epsilon_r
 
 max_test_accs = []
 if args.trials > 1:
+    assert args.use_test, "Multiple runs are only for the final test phase with the test set."
     train_loader, valid_loader, test_loader = get_Adiac_data(args.batch, args.batch, whole_train=True)
 else:
     train_loader, valid_loader, test_loader = get_Adiac_data(args.batch, args.batch)
@@ -88,6 +90,9 @@ for i in range(args.trials):
         model = RON(n_inp, args.n_hid, args.dt, gamma, epsilon, args.rho,
                     args.inp_scaling, topology=args.topology, sparsity=args.sparsity,
                     reservoir_scaler=args.reservoir_scaler, device=device).to(device)
+    elif args.pron:
+        model = PRON(n_inp, args.n_hid, args.dt, gamma, epsilon,
+                     args.inp_scaling, device=device).to(device)
 
     else:
         raise ValueError("Wrong model choice.")
@@ -112,6 +117,8 @@ for i in range(args.trials):
 
 if args.ron:
     f = open(f'{main_folder}/Adiac_log_RON_{args.topology}.txt', 'a')
+elif args.pron:
+    f = open(f'{main_folder}/Adiac_log_PRON_{args.topology}.txt', 'a')
 elif args.esn:
     f = open(f'{main_folder}/Adiac_log_ESN.txt', 'a')
 else:
