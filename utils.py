@@ -222,12 +222,13 @@ class PRON(nn.Module):
         i2h = torch.matmul(x, self.x2h)
         h2h = torch.matmul(hy, self.h2h) + self.bias
 
-        hz = hz + self.dt * (torch.tanh(i2h) - torch.matmul(torch.tanh(h2h), self.h2h_T) - self.gamma * hy - self.epsilon * hz)
+        hz = hz + self.dt * (torch.tanh(i2h) -
+                             torch.matmul(torch.tanh(h2h), self.h2h_T) -
+                             self.gamma * hy - self.epsilon * hz)
         hy = hy + self.dt * hz
         return hy, hz
 
     def forward(self, x):
-        ## initialize hidden states
         hy = torch.zeros(x.size(0),self.n_hid).to(self.device)
         hz = torch.zeros(x.size(0),self.n_hid).to(self.device)
         all_states = []
@@ -236,7 +237,6 @@ class PRON(nn.Module):
             all_states.append(hy)
 
         return torch.stack(all_states, dim=1), [hy]  # list to be compatible with ESN implementation
-
 
 
 def get_mnist_data(bs_train,bs_test):

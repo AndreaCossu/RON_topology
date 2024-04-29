@@ -1,7 +1,7 @@
 from torch import nn
 import torch.nn.utils
 import numpy as np
-from utils import get_mnist_data, RON
+from utils import get_mnist_data, RON, PRON
 import argparse
 from tqdm import tqdm
 from esn import DeepReservoir
@@ -27,6 +27,7 @@ parser.add_argument('--epsilon_range', type=float, default=4.7,
 parser.add_argument('--cpu', action="store_true")
 parser.add_argument('--esn', action="store_true")
 parser.add_argument('--ron', action="store_true")
+parser.add_argument('--pron', action="store_true")
 parser.add_argument('--inp_scaling', type=float, default=1.,
                     help='ESN input scaling')
 parser.add_argument('--rho', type=float, default=0.99,
@@ -83,7 +84,9 @@ for i in range(args.trials):
         model = RON(n_inp, args.n_hid, args.dt, gamma, epsilon, args.rho,
                     args.inp_scaling, topology=args.topology, sparsity=args.sparsity,
                     reservoir_scaler=args.reservoir_scaler, device=device).to(device)
-
+    elif args.pron:
+        model = PRON(n_inp, args.n_hid, args.dt, gamma, epsilon,
+                     args.inp_scaling, device=device).to(device)
     else:
         raise ValueError("Wrong model choice.")
 
@@ -110,6 +113,8 @@ for i in range(args.trials):
 
 if args.ron:
     f = open(f'{main_folder}/sMNIST_log_RON_{args.topology}.txt', 'a')
+elif args.pron:
+    f = open(f'{main_folder}/sMNIST_log_PRON_{args.topology}.txt', 'a')
 elif args.esn:
     f = open(f'{main_folder}/sMNIST_log_ESN.txt', 'a')
 else:
