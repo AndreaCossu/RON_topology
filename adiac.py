@@ -45,7 +45,7 @@ parser.add_argument('--sparsity', type=float, default=0.0,
 parser.add_argument('--reservoir_scaler', type=float, default=1.0,
                     help='Scaler in case of ring/band/toeplitz reservoir')
 
-main_folder = 'result_paris'
+main_folder = 'result'
 args = parser.parse_args()
 print(args)
 
