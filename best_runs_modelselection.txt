@@ -1,0 +1,268 @@
+SMNIST
+
+orthogonal ron 
+
+for gamma in 2 10 20 ; do for gr in 2 10 ; do for eps in 2 10 20 ; do for er in 2 10 ; do for rho in 0.9 9 ; do for is in 0.1 1 10 ; do for dt in 0.042 0.42 4.2 ; do CUDA_VISIBLE_DEVICES=3 python sMNIST.py --n_hid 100 --dt $dt --gamma $gamma --epsilon $eps --gamma_range $gr --epsilon_range $er --inp_scaling $is --rho $rho --ron --trials 1 --topology orthogonal --sparsity 0.8 ; done ; done ; done ; done ; done ; done ; done
+
+sparsity 0.8
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 2.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 1.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.83'] valid: ['0.83'] test: ['0.0']mean/std train: (0.8302631578947368, 0.0) mean/std valid: (0.8306666666666667, 0.0) mean/std test: (0.0, 0.0)
+
+
+sparsity 0.6
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.6, reservoir_scaler: 1.0, train: ['0.85'] valid: ['0.85'] test: ['0.0']mean/std train: (0.8548947368421053, 0.0) mean/std valid: (0.8533333333333334, 0.0) mean/std test: (0.0, 0.0)
+
+
+sparsity 0.4
+
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.4, reservoir_scaler: 1.0, train: ['0.87'] valid: ['0.87'] test: ['0.0']mean/std train: (0.8665263157894737, 0.0) mean/std valid: (0.8693333333333333, 0.0) mean/std test: (0.0, 0.0)
+
+
+sparsity 0.2 
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.2, reservoir_scaler: 1.0, train: ['0.85'] valid: ['0.85'] test: ['0.0']mean/std train: (0.8468771929824561, 0.0) mean/std valid: (0.846, 0.0) mean/std test: (0.0, 0.0)
+
+sparsity 0.0
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 10.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 1.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.86'] valid: ['0.85'] test: ['0.0']mean/std train: (0.863280701754386, 0.0) mean/std valid: (0.8533333333333334, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+
+lower ron
+
+for gamma in 2 10 20 ; do for gr in 2 10 ; do for eps in 2 10 20 ; do for er in 2 10 ; do for rho in 0.9 9 ; do for is in 0.1 1 10 ; do for dt in 0.042 0.42 4.2 ; do CUDA_VISIBLE_DEVICES=6 python sMNIST.py --n_hid 100 --dt $dt --gamma $gamma --epsilon $eps --gamma_range $gr --epsilon_range $er --inp_scaling $is --rho $rho --ron --trials 1 --topology lower --sparsity 0.8 ; done ; done ; done ; done ; done ; done ; done
+
+sparsity 0.8
+
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.84'] valid: ['0.83'] test: ['0.0']mean/std train: (0.8364912280701754, 0.0) mean/std valid: (0.8323333333333334, 0.0) mean/std test: (0.0, 0.0)
+
+sparsity 0.6
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.6, reservoir_scaler: 1.0, train: ['0.81'] valid: ['0.81'] test: ['0.0']mean/std train: (0.8125438596491228, 0.0) mean/std valid: (0.8103333333333333, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+sparsity 0.4
+
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.4, reservoir_scaler: 1.0, train: ['0.84'] valid: ['0.85'] test: ['0.0']mean/std train: (0.839701754385965, 0.0) mean/std valid: (0.847, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+sparsity 0.2
+
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.2, reservoir_scaler: 1.0, train: ['0.85'] valid: ['0.84'] test: ['0.0']mean/std train: (0.8483684210526315, 0.0) mean/std valid: (0.8403333333333334, 0.0) mean/std test: (0.0, 0.0)
+
+
+sparsity 0.0
+
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.83'] valid: ['0.82'] test: ['0.0']mean/std train: (0.832, 0.0) mean/std valid: (0.8233333333333334, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+
+
+
+full
+
+for gamma in 2 10 20 ; do for gr in 2 10 ; do for eps in 2 10 20 ; do for er in 2 10 ; do for rho in 0.9 9 ; do for is in 0.1 1 10 ; do for dt in 0.042 0.42 4.2 ; do CUDA_VISIBLE_DEVICES=3 python sMNIST.py --n_hid 100 --dt $dt --gamma $gamma --epsilon $eps --gamma_range $gr --epsilon_range $er --inp_scaling $is --rho $rho --ron --trials 1 --topology full ; done ; done ; done ; done ; done ; done ; done
+
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.85'] valid: ['0.85'] test: ['0.0']mean/std train: (0.8518771929824561, 0.0) mean/std valid: (0.8483333333333334, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+
+
+leaky esn
+
+sparsity 0.8 0.6 0.4 0.2 0.0
+
+n_hid: 100, batch: 1000, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.9, leaky: 0.01, use_test: False, trials: 1, topology: full, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.58'] valid: ['0.57'] test: ['0.0']mean/std train: (0.5775789473684211, 0.0) mean/std valid: (0.575, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+
+leaky esn sparsity 0.8
+
+units 500
+n_hid: 500, batch: 1000, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.9, leaky: 0.01, use_test: False, trials: 1, topology: full, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.5'] valid: ['0.49'] test: ['0.0']mean/std train: (0.49542105263157893, 0.0) mean/std valid: (0.49266666666666664, 0.0) mean/std test: (0.0, 0.0)
+
+
+units 1000
+
+n_hid: 1000, batch: 1000, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.9, leaky: 0.01, use_test: False, trials: 1, topology: full, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.53'] valid: ['0.53'] test: ['0.0']mean/std train: (0.5298070175438596, 0.0) mean/std valid: (0.532, 0.0) mean/std test: (0.0, 0.0)
+
+
+units 2000
+
+n_hid: 2000, batch: 1000, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.9, leaky: 0.01, use_test: False, trials: 1, topology: full, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.48'] valid: ['0.47'] test: ['0.0']mean/std train: (0.4759122807017544, 0.0) mean/std valid: (0.4663333333333333, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+
+
+ron orthogonal sparsity 0.8
+
+units 500
+n_hid: 500, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.93'] valid: ['0.92'] test: ['0.0']mean/std train: (0.9314210526315789, 0.0) mean/std valid: (0.919, 0.0) mean/std test: (0.0, 0.0)
+
+units 1000
+n_hid: 1000, batch: 1000, dt: 0.042, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.95'] valid: ['0.94'] test: ['0.0']mean/std train: (0.9451228070175438, 0.0) mean/std valid: (0.9366666666666666, 0.0) mean/std test: (0.0, 0.0)
+
+units 2000
+n_hid: 2000, batch: 1000, dt: 0.042, gamma: 10.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.96'] valid: ['0.95'] test: ['0.0']mean/std train: (0.9628947368421052, 0.0) mean/std valid: (0.948, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+
+
+full
+
+units 500
+
+n_hid: 500, batch: 1000, dt: 0.042, gamma: 10.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 1.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.95'] valid: ['0.93'] test: ['0.0']mean/std train: (0.9474035087719298, 0.0) mean/std valid: (0.9276666666666666, 0.0) mean/std test: (0.0, 0.0)
+
+
+units 1000
+n_hid: 1000, batch: 1000, dt: 0.042, gamma: 10.0, epsilon: 2.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 1.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.97'] valid: ['0.96'] test: ['0.0']mean/std train: (0.9654035087719298, 0.0) mean/std valid: (0.9603333333333334, 0.0) mean/std test: (0.0, 0.0)
+
+
+units 2000
+n_hid: 2000, batch: 1000, dt: 0.042, gamma: 10.0, epsilon: 2.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 1.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.98'] valid: ['0.96'] test: ['0.0']mean/std train: (0.980280701754386, 0.0) mean/std valid: (0.959, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+ADIAC
+
+full
+n_hid: 100, batch: 30, dt: 0.01, gamma: 3.0, epsilon: 5.0, gamma_range: 2.0, epsilon_range: 1.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: True, trials: 5, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.86', '0.86', '0.87', '0.84', '0.86'] valid: ['0.0', '0.0', '0.0', '0.0', '0.0'] test: ['0.72', '0.74', '0.74', '0.72', '0.72']mean/std train: (0.8558974358974358, 0.008332347081677906) mean/std valid: (0.0, 0.0) mean/std test: (0.7268542199488491, 0.010407667493286832)
+
+
+leaky esn
+n_hid: 100, batch: 30, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 50.0, rho: 0.99, leaky: 0.0001, use_test: True, trials: 5, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.83', '0.89', '0.87', '0.85', '0.87'] valid: ['0.0', '0.0', '0.0', '0.0', '0.0'] test: ['0.64', '0.72', '0.69', '0.67', '0.71']mean/std train: (0.8641025641025643, 0.020189763779517443) mean/std valid: (0.0, 0.0) mean/std test: (0.6854219948849105, 0.026578784770877925)
+
+
+lower
+0.0
+n_hid: 100, batch: 30, dt: 0.01, gamma: 10.0, epsilon: 20.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.86'] valid: ['0.68'] test: ['0.0']mean/std train: (0.8555555555555555, 0.0) mean/std valid: (0.6833333333333333, 0.0) mean/std test: (0.0, 0.0)
+
+
+0.2
+n_hid: 100, batch: 30, dt: 0.01, gamma: 10.0, epsilon: 10.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.2, reservoir_scaler: 1.0, train: ['0.86'] valid: ['0.68'] test: ['0.0']mean/std train: (0.8555555555555555, 0.0) mean/std valid: (0.675, 0.0) mean/std test: (0.0, 0.0)
+
+0.4
+n_hid: 100, batch: 30, dt: 0.01, gamma: 20.0, epsilon: 20.0, gamma_range: 10.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.4, reservoir_scaler: 1.0, train: ['0.81'] valid: ['0.67'] test: ['0.0']mean/std train: (0.8148148148148148, 0.0) mean/std valid: (0.6666666666666666, 0.0) mean/std test: (0.0, 0.0)
+
+0.6
+n_hid: 100, batch: 30, dt: 0.01, gamma: 10.0, epsilon: 20.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.6, reservoir_scaler: 1.0, train: ['0.86'] valid: ['0.68'] test: ['0.0']mean/std train: (0.8592592592592593, 0.0) mean/std valid: (0.6833333333333333, 0.0) mean/std test: (0.0, 0.0)
+
+0.8
+n_hid: 100, batch: 30, dt: 0.01, gamma: 2.0, epsilon: 10.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.87'] valid: ['0.67'] test: ['0.0']mean/std train: (0.8703703703703703, 0.0) mean/std valid: (0.6666666666666666, 0.0) mean/std test: (0.0, 0.0)
+
+
+orthogonal
+
+0.0
+n_hid: 100, batch: 30, dt: 0.01, gamma: 10.0, epsilon: 20.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.87'] valid: ['0.67'] test: ['0.0']mean/std train: (0.8703703703703703, 0.0) mean/std valid: (0.6666666666666666, 0.0) mean/std test: (0.0, 0.0)
+
+0.2
+n_hid: 100, batch: 30, dt: 0.01, gamma: 10.0, epsilon: 20.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.2, reservoir_scaler: 1.0, train: ['0.89'] valid: ['0.69'] test: ['0.0']mean/std train: (0.8888888888888888, 0.0) mean/std valid: (0.6916666666666667, 0.0) mean/std test: (0.0, 0.0)
+
+0.4
+n_hid: 100, batch: 30, dt: 0.01, gamma: 2.0, epsilon: 20.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.4, reservoir_scaler: 1.0, train: ['0.84'] valid: ['0.65'] test: ['0.0']mean/std train: (0.8444444444444444, 0.0) mean/std valid: (0.65, 0.0) mean/std test: (0.0, 0.0)
+
+0.6
+n_hid: 100, batch: 30, dt: 0.01, gamma: 20.0, epsilon: 20.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.6, reservoir_scaler: 1.0, train: ['0.83'] valid: ['0.68'] test: ['0.0']mean/std train: (0.8333333333333334, 0.0) mean/std valid: (0.675, 0.0) mean/std test: (0.0, 0.0)
+
+0.8
+n_hid: 100, batch: 30, dt: 0.01, gamma: 2.0, epsilon: 20.0, gamma_range: 2.0, epsilon_range: 10.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.86'] valid: ['0.67'] test: ['0.0']mean/std train: (0.8629629629629629, 0.0) mean/std valid: (0.6666666666666666, 0.0) mean/std test: (0.0, 0.0)
+
+
+MACKEY GLASS
+
+full 100
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.14'] valid: ['0.15'] test: ['0.0']mean/std train: (0.13622272520228007, 0.0) mean/std valid: (0.15429771715322793, 0.0) mean/std test: (0.0, 0.0)
+
+
+leaky esn 100
+
+0.0
+n_hid: 100, batch: 30, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.9, leaky: 0.5, use_test: False, trials: 1, topology: lower, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.35'] valid: ['0.36'] test: ['0.0']mean/std train: (0.3486112832916888, 0.0) mean/std valid: (0.3612807239558845, 0.0) mean/std test: (0.0, 0.0)
+
+0.2
+n_hid: 100, batch: 30, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.9, leaky: 0.5, use_test: False, trials: 1, topology: lower, sparsity: 0.2, reservoir_scaler: 1.0, train: ['0.34'] valid: ['0.34'] test: ['0.0']mean/std train: (0.3389857756350283, 0.0) mean/std valid: (0.3432582519863054, 0.0) mean/std test: (0.0, 0.0)
+
+0.4
+n_hid: 100, batch: 30, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.9, leaky: 0.5, use_test: False, trials: 1, topology: lower, sparsity: 0.4, reservoir_scaler: 1.0, train: ['0.32'] valid: ['0.33'] test: ['0.0']mean/std train: (0.3185360431521968, 0.0) mean/std valid: (0.3314895308630813, 0.0) mean/std test: (0.0, 0.0)
+
+0.6
+n_hid: 100, batch: 30, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.9, leaky: 0.5, use_test: False, trials: 1, topology: lower, sparsity: 0.6, reservoir_scaler: 1.0, train: ['0.37'] valid: ['0.38'] test: ['0.0']mean/std train: (0.3663062081099353, 0.0) mean/std valid: (0.37898069979829163, 0.0) mean/std test: (0.0, 0.0)
+
+0.8
+n_hid: 100, batch: 30, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.9, leaky: 0.5, use_test: False, trials: 1, topology: lower, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.34'] valid: ['0.35'] test: ['0.0']mean/std train: (0.3356381040854238, 0.0) mean/std valid: (0.3465377145436861, 0.0) mean/std test: (0.0, 0.0)
+
+orthogonal 100
+0.0
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.22'] valid: ['0.24'] test: ['0.0']mean/std train: (0.22397613266866398, 0.0) mean/std valid: (0.23791577954382934, 0.0) mean/std test: (0.0, 0.0)
+
+0.2
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.2, reservoir_scaler: 1.0, train: ['0.23'] valid: ['0.25'] test: ['0.0']mean/std train: (0.22844745320859933, 0.0) mean/std valid: (0.24501069434161463, 0.0) mean/std test: (0.0, 0.0)
+
+0.4
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.4, reservoir_scaler: 1.0, train: ['0.12'] valid: ['0.13'] test: ['0.0']mean/std train: (0.12431986097366794, 0.0) mean/std valid: (0.13153656421606474, 0.0) mean/std test: (0.0, 0.0)
+
+0.6
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.6, reservoir_scaler: 1.0, train: ['0.13'] valid: ['0.15'] test: ['0.0']mean/std train: (0.13464822206861468, 0.0) mean/std valid: (0.1484246520242331, 0.0) mean/std test: (0.0, 0.0)
+
+0.8
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.1'] valid: ['0.1'] test: ['0.0']mean/std train: (0.09984299431240021, 0.0) mean/std valid: (0.10324697210424709, 0.0) mean/std test: (0.0, 0.0)
+
+
+lower 100
+0.0
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.15'] valid: ['0.16'] test: ['0.0']mean/std train: (0.15300981792433516, 0.0) mean/std valid: (0.1587946989147077, 0.0) mean/std test: (0.0, 0.0)
+
+0.2
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.2, reservoir_scaler: 1.0, train: ['0.2'] valid: ['0.2'] test: ['0.0']mean/std train: (0.1957118422948432, 0.0) mean/std valid: (0.19696944113107684, 0.0) mean/std test: (0.0, 0.0)
+
+0.4
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: lower, sparsity: 0.4, reservoir_scaler: 1.0, train: ['0.16'] valid: ['0.17'] test: ['0.0']mean/std train: (0.15532895321831827, 0.0) mean/std valid: (0.1664585017546555, 0.0) mean/std test: (0.0, 0.0)
+
+0.6
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: True, trials: 5, topology: lower, sparsity: 0.6, reservoir_scaler: 1.0, train: ['0.14', '0.19', '0.16', '0.17', '0.17'] valid: ['0.0', '0.0', '0.0', '0.0', '0.0'] test: ['0.15', '0.21', '0.18', '0.19', '0.18']mean/std train: (0.16584098409211318, 0.01839032036931263) mean/std valid: (0.0, 0.0) mean/std test: (0.1816916377027833, 0.018669405139256127)
+
+
+0.8
+n_hid: 100, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: True, trials: 5, topology: lower, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.19', '0.17', '0.18', '0.17', '0.19'] valid: ['0.0', '0.0', '0.0', '0.0', '0.0'] test: ['0.21', '0.19', '0.19', '0.18', '0.2']mean/std train: (0.1776717423180494, 0.010048057683698717) mean/std valid: (0.0, 0.0) mean/std test: (0.19344665005711287, 0.009369617808977961)
+
+
+full 500
+n_hid: 500, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.13'] valid: ['0.14'] test: ['0.0']mean/std train: (0.12952057420715518, 0.0) mean/std valid: (0.14204849557135307, 0.0) mean/std test: (0.0, 0.0)
+
+full 1000
+n_hid: 1000, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 0.9, leaky: 1.0, use_test: False, trials: 1, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.09'] valid: ['0.14'] test: ['0.0']mean/std train: (0.09489422267983158, 0.0) mean/std valid: (0.13830302232311031, 0.0) mean/std test: (0.0, 0.0)
+
+full 2000
+n_hid: 2000, batch: 30, dt: 0.17, gamma: 10.0, epsilon: 2.0, gamma_range: 10.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: full, sparsity: 0.0, reservoir_scaler: 1.0, train: ['0.07'] valid: ['0.09'] test: ['0.0']mean/std train: (0.07236124932070509, 0.0) mean/std valid: (0.09061706480501197, 0.0) mean/std test: (0.0, 0.0)
+
+
+orthogonal 500
+n_hid: 500, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.03'] valid: ['0.04'] test: ['0.0']mean/std train: (0.030435617675783684, 0.0) mean/std valid: (0.03593544328207028, 0.0) mean/std test: (0.0, 0.0)
+
+
+orthogonal 1000
+n_hid: 1000, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.02'] valid: ['0.08'] test: ['0.0']mean/std train: (0.018779010125320142, 0.0) mean/std valid: (0.07925168612696339, 0.0) mean/std test: (0.0, 0.0)
+
+orthogonal 2000
+n_hid: 2000, batch: 30, dt: 0.17, gamma: 2.0, epsilon: 2.0, gamma_range: 2.0, epsilon_range: 2.0, cpu: False, esn: False, ron: True, inp_scaling: 10.0, rho: 9.0, leaky: 1.0, use_test: False, trials: 1, topology: orthogonal, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.01'] valid: ['0.04'] test: ['0.0']mean/std train: (0.009306490560659538, 0.0) mean/std valid: (0.04444871287504771, 0.0) mean/std test: (0.0, 0.0)
+
+
+leaky 500
+n_hid: 500, batch: 30, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.99, leaky: 0.5, use_test: False, trials: 1, topology: lower, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.22'] valid: ['0.23'] test: ['0.0']mean/std train: (0.2152624709645038, 0.0) mean/std valid: (0.2260434895122058, 0.0) mean/std test: (0.0, 0.0)
+
+
+leaky 1000
+n_hid: 1000, batch: 30, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.99, leaky: 0.5, use_test: False, trials: 1, topology: lower, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.18'] valid: ['0.18'] test: ['0.0']mean/std train: (0.1799235404332997, 0.0) mean/std valid: (0.18257184802418913, 0.0) mean/std test: (0.0, 0.0)
+
+leaky 2000
+n_hid: 2000, batch: 30, dt: 0.042, gamma: 2.7, epsilon: 4.7, gamma_range: 2.7, epsilon_range: 4.7, cpu: False, esn: True, ron: False, inp_scaling: 10.0, rho: 0.99, leaky: 0.5, use_test: False, trials: 1, topology: lower, sparsity: 0.8, reservoir_scaler: 1.0, train: ['0.14'] valid: ['0.15'] test: ['0.0']mean/std train: (0.14256065376590166, 0.0) mean/std valid: (0.15096551513422501, 0.0) mean/std test: (0.0, 0.0)
+
+
+
+
